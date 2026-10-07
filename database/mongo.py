@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from pymongo.mongo_client import MongoClient
-from mymongo.server_api import ServerApi
+from pymongo.server_api import ServerApi
 
 #Carrega as variaveis do .env
 load_dotenv()
@@ -13,6 +13,10 @@ if not uri:
 
 #Cria a conexão
 client = MongoClient(uri, server_api=ServerApi('1'))
+
+#Testa a conexão com o MongoDB
+client.admin.command("ping")
+print("Conectado")
 
 # Exporta o banco de dados para ser importado em outros arquivos
 db = client.mercadolivre

@@ -1,18 +1,20 @@
-import os
-import redis 
-from dotenv import load_dotenv
+"""Basic connection example.
+"""
 
-load_dotenv()
+import redis
 
-host = os.getenv("REDIS_HOST","localhost")
-port = int(os.getenv("REDIS_PORT",6379))
-password = os.getenv("REDIS_PASSWORD", "")
-
-#Conexão com o Redis
-# decode_responses=True transforma os bytes retornados pelo Redis em strings limpas no Python
-redis_client = redis.Redis(
-    host =host,
-    port=port,
-    password=password,
-    decode_responses=True
+r = redis.Redis(
+    host='lively-place-accordant-94048.db.redis.io',
+    port=12561,
+    decode_responses=True,
+    username="default",
+    password="i4uayy74roSv8WRrp72bTzWp0fhCYDYi",
 )
+
+success = r.set('foo', 'bar')
+# True
+
+result = r.get('foo')
+print(result)
+# >>> bar
+
